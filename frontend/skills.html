@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head><title>SkillFill - Skills</title><link rel="stylesheet" href="css/style.css"></head>
+<body>
+<nav><h2>SkillFill</h2><div>
+<a href="dashboard.html">Dashboard</a><a href="assessment.html">Assessment</a><a href="skills.html">Skills</a><a href="internships.html">Internships</a><a href="applications.html">Applications</a><a href="profile.html">Profile</a><a href="industry.html">Industry</a>
+<button class="logout" onclick="logout()">Logout</button></div></nav>
+<main class="container">
+<h1>My Skills</h1>
+<div class="card">
+<h2>Technical Skills</h2>
+<div class="skill-row"><span>Python</span><div class="progress"><div class="progress-fill" style="width:90%"></div></div><b>90%</b></div>
+<div class="skill-row"><span>SQL</span><div class="progress"><div class="progress-fill" style="width:75%"></div></div><b>75%</b></div>
+<div class="skill-row"><span>FastAPI</span><div class="progress"><div class="progress-fill" style="width:55%"></div></div><b>55%</b></div>
+<div class="skill-row"><span>JavaScript</span><div class="progress"><div class="progress-fill" style="width:60%"></div></div><b>60%</b></div>
+</div>
+<div class="card">
+<h2>Add / Update Skill</h2>
+<label>Skill Name</label><input id="skillName" placeholder="e.g. Python">
+<label>Skill Level (1-5)</label><input id="skillLevel" type="number" min="1" max="5" value="3">
+<button class="button" onclick="addSkill()">Save Skill</button>
+<p id="skillMessage"></p>
+</div>
+<h2>Recommended Learning</h2>
+<div class="grid three">
+<div class="card"><h3>FastAPI Fundamentals</h3><p>Build REST APIs using Python.</p><button class="button small-button">Start Learning</button></div>
+<div class="card"><h3>Data Structures</h3><p>Strengthen problem-solving skills.</p><button class="button small-button">Start Learning</button></div>
+<div class="card"><h3>SQL Practice</h3><p>Improve database querying.</p><button class="button small-button">Start Learning</button></div>
+</div>
+</main>
+<script src="js/common.js"></script><script>requireLogin(); async function loadSkills(){try{const d=await apiRequest(`/skills/${getStudentId()}`);const box=document.querySelector("main .card"); const rows=d.skills.map(x=>`<div class="skill-row"><span>${x.skill_name}</span><div class="progress"><div class="progress-fill" style="width:${x.skill_level*20}%"></div></div><b>${x.skill_level*20}%</b></div>`).join(""); if(rows) box.innerHTML="<h2>Technical Skills</h2>"+rows;}catch(e){}} async function addSkill(){try{const n=document.getElementById("skillName").value.trim();const l=Number(document.getElementById("skillLevel").value);if(!n) throw new Error("Enter a skill name");await apiRequest("/skills",{method:"POST",body:JSON.stringify({student_id:Number(getStudentId()),skill_name:n,skill_level:l})});document.getElementById("skillMessage").textContent="Skill saved successfully.";loadSkills();}catch(e){document.getElementById("skillMessage").textContent=e.message;}} loadSkills();</script>
+</body>
+</html>

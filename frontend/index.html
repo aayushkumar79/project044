@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SkillFill - Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="login-page">
+    <div class="login-box">
+        <h1>SkillFill</h1>
+        <p>Academia–Industry Collaboration Platform</p>
+
+        <div id="loginForm">
+            <input id="email" type="email" placeholder="Email">
+            <input id="password" type="password" placeholder="Password">
+            <button onclick="login()">Login</button>
+            <p id="loginMessage"></p>
+            <p><a href="#" onclick="showRegister(); return false;">Create a new student account</a></p>
+        </div>
+
+        <div id="registerForm" style="display:none;">
+            <input id="regName" type="text" placeholder="Full Name">
+            <input id="regEmail" type="email" placeholder="Email">
+            <input id="regPassword" type="password" placeholder="Password">
+            <input id="regCourse" type="text" placeholder="Course / Degree">
+            <input id="regCollege" type="text" placeholder="College">
+            <input id="regInterest" type="text" placeholder="Career Interest">
+            <button onclick="registerStudent()">Register</button>
+            <p id="registerMessage"></p>
+            <p><a href="#" onclick="showLogin(); return false;">Already have an account? Login</a></p>
+        </div>
+    </div>
+
+<script src="js/common.js"></script>
+<script>
+function showRegister() {
+    document.getElementById("loginForm").style.display = "none";
+    document.getElementById("registerForm").style.display = "block";
+}
+
+function showLogin() {
+    document.getElementById("registerForm").style.display = "none";
+    document.getElementById("loginForm").style.display = "block";
+}
+
+async function login() {
+    const message = document.getElementById("loginMessage");
+    message.textContent = "Signing in...";
+    try {
+        const data = await apiRequest("/login", {
+            method: "POST",
+            body: JSON.stringify({
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value
+            })
+        });
+        if (!data.student_id) throw new Error(data.message || "Invalid email or password");
+        localStorage.setItem("studentId", data.student_id);
+        localStorage.setItem("studentName", data.name || "Student");
+        localStorage.setItem("studentEmail", data.email || "");
+        window.location.href = "dashboard.html";
+    } catch (error) {
+        message.textContent = error.message;
+    }
+}
+
+async function registerStudent() {
+    const message = document.getElementById("registerMessage");
+    message.textContent = "Creating account...";
+    try {
+        const data = await apiRequest("/register", {
+            method: "POST",
+            body: JSON.stringify({
+                name: document.getElementById("regName").value,
+                email: document.getElementById("regEmail").value,
+                password: document.getElementById("regPassword").value,
+                course: document.getElementById("regCourse").value,
+                college: document.getElementById("regCollege").value,
+                career_interest: document.getElementById("regInterest").value
+            })
+        });
+        if (!data.student_id) throw new Error(data.message || "Registration failed");
+        message.textContent = "Registration successful. You can now login.";
+        showLogin();
+        document.getElementById("email").value = document.getElementById("regEmail").value;
+    } catch (error) {
+        message.textContent = error.message;
+    }
+}
+</script>
+</body>
+</html>

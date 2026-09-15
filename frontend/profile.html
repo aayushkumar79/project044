@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head><title>SkillFill - Profile</title><link rel="stylesheet" href="css/style.css"></head>
+<body>
+<nav><h2>SkillFill</h2><div>
+<a href="dashboard.html">Dashboard</a><a href="assessment.html">Assessment</a><a href="skills.html">Skills</a><a href="internships.html">Internships</a><a href="applications.html">Applications</a><a href="profile.html">Profile</a><a href="industry.html">Industry</a>
+<button class="logout" onclick="logout()">Logout</button></div></nav>
+<main class="container narrow">
+<h1>My Profile</h1>
+<form class="card" id="profileForm">
+<label>Name</label><input id="name" value="Student">
+<label>College</label><input id="college" value="ABC Institute of Technology">
+<label>Degree</label><input id="degree" value="B.Tech Computer Science">
+<label>Career Interest</label><input id="interest" value="Software Development">
+<button class="button" type="submit">Save Profile</button>
+<p id="saved"></p>
+</form>
+</main>
+<script src="js/common.js"></script>
+<script>
+requireLogin();
+const nameInput=document.getElementById("name");
+const collegeInput=document.getElementById("college");
+const degreeInput=document.getElementById("degree");
+const interestInput=document.getElementById("interest");
+async function loadProfile(){
+ try{const s=await apiRequest(`/student/${getStudentId()}`); nameInput.value=s.name; collegeInput.value=s.college; degreeInput.value=s.course; interestInput.value=s.career_interest||"";}catch(e){document.getElementById("saved").textContent=e.message;}}
+profileForm.onsubmit=async function(e){e.preventDefault();try{await apiRequest(`/student/${getStudentId()}`,{method:"PUT",body:JSON.stringify({name:nameInput.value,college:collegeInput.value,course:degreeInput.value,career_interest:interestInput.value})});localStorage.setItem("studentName",nameInput.value);document.getElementById("saved").textContent="Profile saved successfully.";}catch(e){document.getElementById("saved").textContent=e.message;}};
+loadProfile();
+</script>
+</body>
+</html>

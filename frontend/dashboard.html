@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SkillFill - Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav>
+    <h2>SkillFill</h2>
+    <div>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="assessment.html">Assessment</a>
+        <a href="skills.html">Skills</a>
+        <a href="internships.html">Internships</a>
+        <a href="applications.html">Applications</a>
+        <a href="profile.html">Profile</a>
+        <a href="industry.html">Industry</a>
+        <button class="logout" onclick="logout()">Logout</button>
+    </div>
+</nav>
+
+<main class="container">
+    <section class="hero">
+        <div>
+            <p class="small">STUDENT DASHBOARD</p>
+            <h1>Welcome back, Student!</h1>
+            <p>Track your skills, discover opportunities and build your career.</p>
+            <a class="button" href="assessment.html">Take Skill Assessment</a>
+        </div>
+        <div class="readiness">
+            <span>Career Readiness</span>
+            <strong>78%</strong>
+            <div class="progress"><div class="progress-fill" style="width:78%"></div></div>
+        </div>
+    </section>
+
+    <section class="grid three">
+        <div class="card stat"><span>Skills</span><strong>8</strong><p>6 strong · 2 improving</p></div>
+        <div class="card stat"><span>Recommended</span><strong>12</strong><p>Opportunities matching you</p></div>
+        <div class="card stat"><span>Applications</span><strong id="applicationCount">0</strong><p>Active applications</p></div>
+    </section>
+
+    <section>
+        <h2>Your Skill Profile</h2>
+        <div class="card">
+            <div class="skill-row"><span>Python</span><div class="progress"><div class="progress-fill" style="width:90%"></div></div><b>90%</b></div>
+            <div class="skill-row"><span>SQL</span><div class="progress"><div class="progress-fill" style="width:75%"></div></div><b>75%</b></div>
+            <div class="skill-row"><span>Web Development</span><div class="progress"><div class="progress-fill" style="width:65%"></div></div><b>65%</b></div>
+            <div class="skill-row"><span>Communication</span><div class="progress"><div class="progress-fill" style="width:80%"></div></div><b>80%</b></div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Skill Gaps</h2>
+        <div class="grid three">
+            <div class="card gap"><b>FastAPI</b><span>Beginner</span><p>Recommended for backend development.</p></div>
+            <div class="card gap"><b>Data Structures</b><span>Intermediate</span><p>Improve problem-solving ability.</p></div>
+            <div class="card gap"><b>Cloud Basics</b><span>Beginner</span><p>Useful for modern software roles.</p></div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Recommended Opportunities</h2>
+        <div class="grid three">
+            <div class="card opportunity"><h3>Python Developer Intern</h3><p>TechNova</p><b>92% Match</b><a href="internships.html">View</a></div>
+            <div class="card opportunity"><h3>Backend Developer Intern</h3><p>DataWorks</p><b>86% Match</b><a href="internships.html">View</a></div>
+            <div class="card opportunity"><h3>Data Analyst Intern</h3><p>Insight Labs</p><b>81% Match</b><a href="internships.html">View</a></div>
+        </div>
+    </section>
+</main>
+<script src="js/common.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

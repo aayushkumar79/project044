@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head><title>SkillFill - Industry</title><link rel="stylesheet" href="css/style.css"></head>
+<body>
+<nav><h2>SkillFill</h2><div>
+<a href="dashboard.html">Dashboard</a><a href="assessment.html">Assessment</a><a href="skills.html">Skills</a><a href="internships.html">Internships</a><a href="applications.html">Applications</a><a href="profile.html">Profile</a><a href="industry.html">Industry</a>
+<button class="logout" onclick="logout()">Logout</button></div></nav>
+<main class="container">
+<h1>Industry Dashboard</h1>
+<div class="grid two">
+<form id="postForm" class="card">
+<h2>Post Internship</h2>
+<label>Role</label><input id="role" placeholder="e.g. Backend Developer Intern" required>
+<label>Company</label><input id="company" placeholder="Company name" required>
+<label>Required Skill</label><input id="skill" placeholder="e.g. Python" required>
+<label>Minimum Skill Score</label><input id="score" type="number" min="0" max="100" value="60" required>
+<button class="button">Post Opportunity</button>
+<p id="postMessage"></p>
+</form>
+
+<div class="card">
+<h2>Matching Candidates</h2>
+<div class="candidate"><b>Student A</b><span>Python · 90%</span><strong>92% Match</strong></div>
+<div class="candidate"><b>Student B</b><span>Python · 82%</span><strong>85% Match</strong></div>
+<div class="candidate"><b>Student C</b><span>SQL · 78%</span><strong>76% Match</strong></div>
+</div>
+</div>
+</main>
+<script src="js/common.js"></script>
+<script>
+async function postOpportunity(e){e.preventDefault();const msg=document.getElementById("postMessage");try{await apiRequest("/opportunities",{method:"POST",body:JSON.stringify({title:role.value,company:company.value,description:`${role.value} opportunity`,location:"India",opportunity_type:"Internship",required_skills:skill.value,minimum_skill_level:Number(score.value)})});msg.textContent="Internship posted successfully. It is now available for matching.";postForm.reset();}catch(err){msg.textContent=err.message;}}
+postForm.onsubmit=postOpportunity;
+</script>
+</body>
+</html>

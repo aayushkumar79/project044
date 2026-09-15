@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SkillFill - Assessment</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav><h2>SkillFill</h2><div>
+<a href="dashboard.html">Dashboard</a><a href="assessment.html">Assessment</a><a href="skills.html">Skills</a><a href="internships.html">Internships</a><a href="applications.html">Applications</a><a href="profile.html">Profile</a><a href="industry.html">Industry</a>
+<button class="logout" onclick="logout()">Logout</button></div></nav>
+
+<main class="container narrow">
+<h1>Skill Assessment</h1>
+<p>Answer these questions to estimate your technical skill profile.</p>
+
+<form id="assessmentForm" class="card">
+<div class="question"><h3>1. Which language is commonly used for backend development?</h3>
+<label><input type="radio" name="q1" value="1"> Python</label>
+<label><input type="radio" name="q1" value="0"> HTML</label>
+<label><input type="radio" name="q1" value="0"> CSS</label></div>
+
+<div class="question"><h3>2. Which technology is used to manage relational data?</h3>
+<label><input type="radio" name="q2" value="1"> SQL</label>
+<label><input type="radio" name="q2" value="0"> Photoshop</label>
+<label><input type="radio" name="q2" value="0"> Figma</label></div>
+
+<div class="question"><h3>3. What does an API allow?</h3>
+<label><input type="radio" name="q3" value="1"> Software systems to communicate</label>
+<label><input type="radio" name="q3" value="0"> Only image editing</label>
+<label><input type="radio" name="q3" value="0"> Only printing</label></div>
+
+<div class="question"><h3>4. Which is a Python web framework?</h3>
+<label><input type="radio" name="q4" value="1"> FastAPI</label>
+<label><input type="radio" name="q4" value="0"> Excel</label>
+<label><input type="radio" name="q4" value="0"> PowerPoint</label></div>
+
+<div class="question"><h3>5. Which data structure follows LIFO?</h3>
+<label><input type="radio" name="q5" value="1"> Stack</label>
+<label><input type="radio" name="q5" value="0"> Queue</label>
+<label><input type="radio" name="q5" value="0"> Graph</label></div>
+
+<button class="button" type="submit">Submit Assessment</button>
+</form>
+<div id="result"></div>
+</main>
+<script src="js/common.js"></script>
+<script src="js/assessment.js"></script>
+</body>
+</html>
