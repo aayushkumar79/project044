@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head><title>SkillBridge - Profile</title><link rel="stylesheet" href="css/style.css"></head>
+<body>
+<nav><h2>SkillBridge</h2><div>
+<a href="dashboard.html">Dashboard</a><a href="assessment.html">Assessment</a><a href="skills.html">Skills</a><a href="internships.html">Internships</a><a href="applications.html">Applications</a><a href="profile.html">Profile</a><a href="industry.html">Industry</a>
+<button class="logout" onclick="logout()">Logout</button></div></nav>
+<main class="container narrow">
+<h1>My Profile</h1>
+<form class="card" id="profileForm">
+<label>Name</label><input id="name" value="Student">
+<label>College</label><input id="college" value="ABC Institute of Technology">
+<label>Degree</label><input id="degree" value="B.Tech Computer Science">
+<label>Career Interest</label><input id="interest" value="Software Development">
+<button class="button" type="submit">Save Profile</button>
+<p id="saved"></p>
+</form>
+</main>
+<script>
+const savedProfile = JSON.parse(localStorage.getItem("profile") || "null");
+if (savedProfile) {
+    name.value=savedProfile.name; college.value=savedProfile.college;
+    degree.value=savedProfile.degree; interest.value=savedProfile.interest;
+}
+profileForm.onsubmit=function(e){
+    e.preventDefault();
+    localStorage.setItem("profile", JSON.stringify({
+        name:name.value, college:college.value, degree:degree.value, interest:interest.value
+    }));
+    saved.textContent="Profile saved successfully.";
+};
+function logout(){localStorage.removeItem("loggedIn");window.location.href="index.html";}
+</script>
+</body>
+</html>
